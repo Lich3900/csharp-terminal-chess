@@ -1,0 +1,14 @@
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.GeneratedMSBuildEditorConfig.editorconfig
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.AssemblyInfoInputs.cache
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.AssemblyInfo.cs
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.csproj.CoreCompileInputs.cache
+/home/Lisichka/programmingIg/cSharp/chess/bin/Debug/net9.0/chess
+/home/Lisichka/programmingIg/cSharp/chess/bin/Debug/net9.0/chess.deps.json
+/home/Lisichka/programmingIg/cSharp/chess/bin/Debug/net9.0/chess.runtimeconfig.json
+/home/Lisichka/programmingIg/cSharp/chess/bin/Debug/net9.0/chess.dll
+/home/Lisichka/programmingIg/cSharp/chess/bin/Debug/net9.0/chess.pdb
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.dll
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/refint/chess.dll
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.pdb
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.genruntimeconfig.cache
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/ref/chess.dll
