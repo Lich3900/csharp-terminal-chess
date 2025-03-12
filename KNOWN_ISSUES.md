@@ -1,0 +1,3 @@
+# Known issues
+## Game logic 
+-

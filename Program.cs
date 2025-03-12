@@ -99,18 +99,16 @@ class Chess {
         }
         
     }
-    public int isValid(int firstRow, int firstCol,int lastRow, int lastCol, int type){
+    private int isValid(int firstRow, int firstCol,int lastRow, int lastCol, int type){
         if(type == 0) return 0;
         switch(type){
         case int n when (n == 1 || n == 13): return isValidPawn(firstRow,firstCol,lastRow,lastCol);
             break;
         case 2: return isValidKnight(firstRow,firstCol,lastRow,lastCol);
             break; 
-        case 3:
-            Console.Write("♗|");
+        case 3: return isValidBishop(firstRow,firstCol,lastRow,lastCol);
             break;
-        case 4:
-            Console.Write("♖|");
+        case int n when (n == 4 || n == 14): return isValidRook(firstRow,firstCol,lastRow,lastCol);
             break;
         case 5:
             Console.Write("♕|");
@@ -122,11 +120,9 @@ class Chess {
             break;
         case 8: return isValidKnight(firstRow,firstCol,lastRow,lastCol);
             break;
-        case 9:
-            Console.Write("♝|");
+        case 9: return isValidBishop(firstRow,firstCol,lastRow,lastCol);
             break;
-        case 10:
-            Console.Write("♜|");
+        case int n when (n == 10 || n == 17): return isValidRook(firstRow,firstCol,lastRow,lastCol);
             break; 
         case 11:
             Console.Write("♛|");
@@ -134,13 +130,10 @@ class Chess {
         case 12:
             Console.Write("♚|");
             break;
-        case 0:
-            Console.Write(" |");
-            break;
         }
     return 1;
     }
-    public int isValidPawn(int startRow, int startCol, int endRow, int endCol){
+    private int isValidPawn(int startRow, int startCol, int endRow, int endCol){
         if(chessBoard[startRow,startCol] == 1 || chessBoard[startRow,startCol] == 13){
             if(chessBoard[startRow,startCol] == 13) //white which moved
                 if((startCol == endCol && startRow - endRow == 1 && chessBoard[endRow,endCol] == 0) || (((startCol == endCol+1 || startCol == endCol-1) && startRow - endRow == 1 && chessBoard[endRow,endCol] != 0)))
@@ -148,7 +141,7 @@ class Chess {
                 else 
                     return 0;
             else
-                if((startCol == endCol && (startRow - endRow == 1 || startRow - endRow == 2) && chessBoard[endRow,endCol] == 0) || ((startCol == endCol+1 || startCol == endCol-1) && startRow - endRow == 1 && chessBoard[endRow,endCol] != 0))
+                if((startCol == endCol && (startRow - endRow == 1 || (startRow - endRow == 2 && chessBoard[startRow - 1,startCol] == 0)) && chessBoard[endRow,endCol] == 0) || ((startCol == endCol+1 || startCol == endCol-1) && startRow - endRow == 1 && chessBoard[endRow,endCol] != 0))
                     return 1;
                 else //white that hasnt moved
                     return 0;
@@ -160,13 +153,13 @@ class Chess {
                 else 
                     return 0;
             else
-                if((startCol == endCol && (startRow - endRow == -1 || startRow - endRow == -2) && chessBoard[endRow,endCol] == 0) || ((startCol == endCol+1 || startCol == endCol-1) && startRow - endRow == -1 && chessBoard[endRow,endCol] != 0))
+                if((startCol == endCol && (startRow - endRow == -1 || (startRow - endRow == -2 && chessBoard[startRow + 1,startCol] == 0)) && chessBoard[endRow,endCol] == 0) || ((startCol == endCol+1 || startCol == endCol-1) && startRow - endRow == -1 && chessBoard[endRow,endCol] != 0))
                     return 1;
                 else //black that hasnt moved
                     return 0;
         }//black
     }
-    public int isValidKnight(int startRow, int startCol, int endRow, int endCol){
+    private int isValidKnight(int startRow, int startCol, int endRow, int endCol){
         //check for is the move is right
         if((Math.Abs(endRow - startRow) == 2 && Math.Abs(endCol - startCol) == 1) ||(Math.Abs(endRow - startRow) == 1 && Math.Abs(endCol - startCol) == 2)){
             if(chessBoard[startRow, startCol] == 2)
@@ -179,19 +172,56 @@ class Chess {
             return 0;
         }
     }
-    public int isValidBishop(int startRow, int startCol, int endRow, int endCol){
+    private int isValidBishop(int startRow, int startCol, int endRow, int endCol){
+        if(Math.Abs(endRow - startRow) == Math.Abs(endCol - startCol) && crawler(startRow,startCol,endRow,endCol))
+            if(chessBoard[startRow,startCol] == 3)
+                return (new int[] {7,8,9,10,11,12,16,17,18,0}.Contains(chessBoard[endRow,endCol])) ? 1 : 0;
+            else 
+                return (new int[] {1,2,3,4,5,6,13,14,15,0}.Contains(chessBoard[endRow,endCol])) ? 1 : 0;
+        else 
+            return 0;
+    }
+    private int isValidRook(int startRow, int startCol, int endRow, int endCol){
+        if(((Math.Abs(endRow - startRow) !=0 && Math.Abs(endCol - startCol) == 0) || (Math.Abs(endRow - startRow) == 0 && Math.Abs(endCol - startCol) != 0)) && crawler(startRow,startCol,endRow,endCol))
+            if(chessBoard[startRow,startCol] == 4 || chessBoard[startRow,startCol] == 14)
+                return (new int[] {7,8,9,10,11,12,16,17,18,0}.Contains(chessBoard[endRow,endCol])) ? 1 : 0;
+            else 
+                return (new int[] {1,2,3,4,5,6,13,14,15,0}.Contains(chessBoard[endRow,endCol])) ? 1 : 0;
+        else 
+            return 0;
+    }
+    private int isValidQueen(int startRow, int startCol, int endRow, int endCol){
+        if(((Math.Abs(endRow - startRow) !=0 && Math.Abs(endCol - startCol) == 0) || (Math.Abs(endRow - startRow) == 0 && Math.Abs(endCol - startCol) != 0)) && crawler(startRow,startCol,endRow,endCol))
+            if(chessBoard[startRow,startCol] == 4)
+                return (new int[] {7,8,9,10,11,12,16,17,18,0}.Contains(chessBoard[endRow,endCol])) ? 1 : 0;
+            else 
+                return (new int[] {1,2,3,4,5,6,13,14,15,0}.Contains(chessBoard[endRow,endCol])) ? 1 : 0;
+        else 
+            return 0;
+    }
+    private int isValidKing(int startRow, int startCol, int endRow, int endCol){
         return 1;
     }
-    public int isValidRook(int startRow, int startCol, int endRow, int endCol){
-        return 1;
-    }
-    public int isValidQueen(int startRow, int startCol, int endRow, int endCol){
-        return 1;
-    }
-    public int isValidKing(int startRow, int startCol, int endRow, int endCol){
-        return 1;
-    }
-    public int CheckForFirstMove(int i){
+    private bool crawler(int startRow, int startCol, int endRow, int endCol){
+        //crawl type means which 
+        int directionByRow = Math.Sign(endRow - startRow); 
+        int directionByCol = Math.Sign(endCol - startCol);
+        int counter = 1,currRow = startRow+directionByRow, currCol = startCol+directionByCol;
+        //FUTURE - might need check for really close postions e. g.(1 3 2 3) (2 2 2 3) etc
+        if((Math.Abs(endRow - startRow) == 1) || Math.Abs(endCol - startCol) == 1)
+            return true;
+        //counter used to check how much checks have been made
+        do{
+            Console.WriteLine($"To help debug, here is currRow {currRow}, and here is currCol {currCol}");
+            if(chessBoard[currRow,currCol] != 0)
+                return false;
+            currRow+=directionByRow;
+            currCol+=directionByCol;
+            ++counter;
+        }while(counter < Math.Abs(endRow - startRow) && counter < Math.Abs(endCol - startCol));
+        return true;
+    }// crawls from start to end of path to check is there a figures in the way
+    private int CheckForFirstMove(int i){
         switch(i){
             case 1:
                 return 13;
@@ -217,7 +247,7 @@ class Chess {
         }
     }
 }
-class Programm {
+class Program {
     static void Main(){
         Chess pisa = new Chess();
         pisa.restartBoard();

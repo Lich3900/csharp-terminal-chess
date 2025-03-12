@@ -12,3 +12,4 @@
 /home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.pdb
 /home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.genruntimeconfig.cache
 /home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/ref/chess.dll
+/home/Lisichka/programmingIg/cSharp/chess/obj/Debug/net9.0/chess.sourcelink.json
